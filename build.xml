@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project name="webutils" default="info">
+    <target name="info">
+        <echo>Hello World - Welcome to WebUtils' Ant project</echo>
+    </target>
+</project>
