@@ -11,6 +11,9 @@
     <path id="junit.libs.path">
         <fileset dir="${junit.libs}"/>
     </path>
+    <path id="webutils.path">
+        <pathelement location="${build}"/>
+    </path>
 
 
     <target name="info">
@@ -29,10 +32,14 @@
 
     <target name="test" depends="compile">
         <mkdir dir="${test.build}"/>
-        <javac srcdir="${test}" destdir="${test.build}" classpathref="junit.libs.path" includeantruntime="false"/>
+        <javac srcdir="${test}" destdir="${test.build}" includeantruntime="false">
+            <classpath refid="junit.libs.path"/>
+            <classpath refid="webutils.path"/>
+        </javac>
 
         <junitlauncher>
             <classpath refid="junit.libs.path"/>
+            <classpath refid="webutils.path"/>
             
             <classpath>
                 <pathelement location="${test.build}"/>
