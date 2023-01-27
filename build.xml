@@ -3,6 +3,15 @@
     <property name="src" location="src"/>
     <property name="build" location="build"/>
     <property name="dist" location="dist"/>
+    <property name="junit.libs" location="lib/test"/>
+    <property name="test" location="test"/>
+    <property name="test.build" location="test-build/classes"/>
+    <property name="test.output" location="test-build/output"/>
+
+    <path id="junit.libs.path">
+        <fileset dir="${junit.libs}"/>
+    </path>
+
 
     <target name="info">
         <echo>Hello World - Welcome to WebUtils' Ant project</echo>
@@ -11,13 +20,32 @@
     <target name="init">
         <tstamp/>
         <mkdir dir="${build}"/>
+        <mkdir dir="${test.output}"/>
     </target>
 
     <target name="compile" depends="init">
-        <javac srcdir="${src}" destdir="${build}"/>
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
     </target>
 
-    <target name="dist" depends="compile">
+    <target name="test" depends="compile">
+        <mkdir dir="${test.build}"/>
+        <javac srcdir="${test}" destdir="${test.build}" classpathref="junit.libs.path" includeantruntime="false"/>
+
+        <junitlauncher>
+            <classpath refid="junit.libs.path"/>
+            
+            <classpath>
+                <pathelement location="${test.build}"/>
+            </classpath>
+            <testclasses outputdir="${test.output}">
+                <fileset dir="${test.build}"/>
+                <listener type="legacy-brief" sendSysOut="true"/>
+                <listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
+            </testclasses>
+        </junitlauncher>
+    </target>
+
+    <target name="dist" depends="test">
         <mkdir dir="${dist}/lib"/>
         <jar jarfile="${dist}/lib/WebUtils-${DSTAMP}.jar" basedir="${build}"/>
     </target>
@@ -25,6 +53,7 @@
     <target name="clean">
         <delete dir="${build}"/>
         <delete dir="${dist}"/>
+        <delete dir="test-build"/>
     </target>
     
 </project>
