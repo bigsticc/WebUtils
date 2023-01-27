@@ -5,7 +5,6 @@ import java.util.Map;
 public class HttpResponse {
     String version;
     HttpStatus status;
-    
     Map<String, String> headers;
     String body;
 
@@ -41,5 +40,16 @@ public class HttpResponse {
     }
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public String toString() {
+        StringBuilder response = new StringBuilder();
+        response.append(version + " " + status.getStatus() + " " + status.getReasonPhrase() + "\r\n");
+        for (Map.Entry<String, String> header : headers.entrySet()) {
+            response.append(header.getKey() + ": " + header.getValue() + "\r\n");
+        }
+        response.append("\r\n");
+        response.append(body);
+        return response.toString();
     }
 }
