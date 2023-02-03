@@ -10,26 +10,76 @@ import java.util.Map;
 
 public class HttpParser {
 
+    public static String serializeRequest(HttpRequest req) {
+        StringBuilder sb = new StringBuilder();
+
+        // Building request line
+        sb
+        .append(req.getMethod().name())
+        .append(" ")
+        .append(req.getUri().toString())
+        .append(" ")
+        .append(req.getVersion())
+        .append("\r\n");
+
+        // Putting headers in request
+        for(Map.Entry<String,String> header : req.getHeaders().entrySet()) {
+            sb.append(header.getKey()).append(":").append(header.getValue()).append("\r\n");
+        }
+
+        // Adding empty line, and appending body
+        sb.append("\r\n").append(req.getBody());
+
+        return sb.toString();
+    }
+    public static String serializeResponse(HttpResponse res) {
+        StringBuilder sb = new StringBuilder();
+        sb
+        .append(res.version)
+        .append(" ")
+        .append(res.status.getStatus())
+        .append(" ")
+        .append(res.status.getReasonPhrase())
+        .append("\r\n");
+
+        for(Map.Entry<String, String> header : res.getHeaders().entrySet()) {
+            sb.append(header.getKey()).append(":").append(header.getValue()).append("\r\n");
+        }
+
+        sb.append("\r\n").append(res.getBody());
+        
+        return sb.toString();
+    }
+
     public static HttpRequest parseRequest(InputStream inputStream) throws IOException {
-        // read the input stream and parse the request
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
         String requestLine = reader.readLine();
         String[] requestLineComponents = requestLine.split(" ");
+
         HttpMethod method = HttpMethod.valueOf(requestLineComponents[0]);
         URI uri = URI.create(requestLineComponents[1]);
         String version = requestLineComponents[2];
+
         Map<String, String> headers = parseHeaders(reader);
         String body = parseBody(reader, headers);
         
-        // create a new HttpRequest object and set its fields
-        HttpRequest request = new HttpRequest();
-        request.setMethod(method);
-        request.setUri(uri);
-        request.setVersion(version);
-        request.setHeaders(headers);
-        request.setBody(body);
-        
-        return request;
+        reader.close();
+
+        return new HttpRequest(method, uri, version, headers, body);
+    }
+    public static HttpResponse parseResponse(InputStream inputStream) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String requestLine = reader.readLine();
+        String[] requestLineComponents = requestLine.split(" ");
+
+        String version = requestLineComponents[0];
+        HttpStatus status = HttpStatus.getStatus(Integer.parseInt(requestLineComponents[1]));
+
+        Map<String, String> headers = parseHeaders(reader);
+        String body = parseBody(reader, headers);
+        return new HttpResponse(version, status, headers, body);
     }
 
 
@@ -46,7 +96,6 @@ public class HttpParser {
         }
         return headers;
     }
-
     private static String parseBody(BufferedReader reader, Map<String, String> headers) throws IOException {
         StringBuilder body = new StringBuilder();
         if (headers.containsKey("Content-Length")) {

@@ -85,4 +85,11 @@ public enum HttpStatus {
     public String getReasonPhrase() {
         return reasonPhrase;
     }
+
+    public static HttpStatus getStatus(int code) {
+        for(HttpStatus status : values()) {
+            if(status.getStatus() == code) return status;
+        }
+        return null;
+    }
 }

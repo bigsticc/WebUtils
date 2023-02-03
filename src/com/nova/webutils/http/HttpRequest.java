@@ -1,6 +1,7 @@
 package com.nova.webutils.http;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequest {
@@ -8,7 +9,7 @@ public class HttpRequest {
     URI uri;
     String version;
 
-    Map<String, String> headers;
+    Map<String, String> headers = new HashMap<>();
     String body;
     
     protected HttpRequest() {}

@@ -7,6 +7,7 @@
     <property name="test" location="test"/>
     <property name="test.build" location="test-build/classes"/>
     <property name="test.output" location="test-build/output"/>
+    <property name="test.html" location="test-build/html"/>
 
     <path id="junit.libs.path">
         <fileset dir="${junit.libs}"/>
@@ -24,6 +25,7 @@
         <tstamp/>
         <mkdir dir="${build}"/>
         <mkdir dir="${test.output}"/>
+        <mkdir dir="${test.html}"/>
     </target>
 
     <target name="compile" depends="init">
@@ -46,10 +48,15 @@
             </classpath>
             <testclasses outputdir="${test.output}">
                 <fileset dir="${test.build}"/>
-                <listener type="legacy-brief" sendSysOut="true"/>
                 <listener type="legacy-xml" sendSysErr="true" sendSysOut="true"/>
             </testclasses>
         </junitlauncher>
+        <junitreport todir="${test.html}">
+            <fileset dir="${test.output}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.html}"/>
+        </junitreport>
     </target>
 
     <target name="dist" depends="test">

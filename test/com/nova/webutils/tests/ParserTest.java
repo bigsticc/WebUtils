@@ -14,16 +14,14 @@ import java.net.URI;
 
 public class ParserTest {
     @Test
-    public void testParse() throws IOException {
+    public void testReqParse() throws IOException {
         String req = """
         POST /path/to/resource HTTP/1.1
         Host: www.example.com
         Content-Type: application/json
-        Content-Length: 42
-        {
-            \"name\": \"John Smith\",
-            \"age\": 30
-        }
+        Content-Length: 32
+
+        {\"name\": \"John Smith\",\"age\": 30}
         """;
 
         HttpRequest request = HttpParser.parseRequest(new ByteArrayInputStream(req.getBytes()));
@@ -31,17 +29,15 @@ public class ParserTest {
         HttpRequest correct = new RequestBuilder()
             .method(HttpMethod.POST)
             .path(URI.create("/path/to/resource"))
+            .version("HTTP/1.1")
             .header("Host", "www.example.com")
             .header("Content-Type", "application/json")
-            .header("Content-Length", "42")
-            .body("""
-            {
-                \"name\": \"John Smith\",
-                \"age\": 30
-            }        
-            """)
+            .header("Content-Length", "32")
+            .body("{\"name\": \"John Smith\",\"age\": 30}")
             .getRequest();
         
-        assertEquals(correct, request);
+        String reqStr = HttpParser.serializeRequest(request);
+        String correctStr = HttpParser.serializeRequest(correct);
+        assertEquals(reqStr, correctStr);
     }
 }
