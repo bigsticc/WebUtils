@@ -17,6 +17,12 @@ import com.nova.webutils.http.HttpResponse;
 import com.nova.webutils.http.HttpStatus;
 import com.nova.webutils.http.ResponseBuilder;
 
+/** Main entry point to a WebUtils system, recieves http requests
+ *  and delegates them to user written applications
+ *  @author Supernova
+ *  @since 1.0
+ */
+
 public class AppServer {
     Selector selector;
     ServerSocketChannel socket;
