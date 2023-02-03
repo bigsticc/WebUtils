@@ -4,7 +4,10 @@ import org.junit.jupiter.api.Test;
 import com.nova.webutils.http.HttpMethod;
 import com.nova.webutils.http.HttpParser;
 import com.nova.webutils.http.HttpRequest;
+import com.nova.webutils.http.HttpResponse;
+import com.nova.webutils.http.HttpStatus;
 import com.nova.webutils.http.RequestBuilder;
+import com.nova.webutils.http.ResponseBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +40,32 @@ public class ParserTest {
             .getRequest();
         
         String reqStr = HttpParser.serializeRequest(request);
-        String correctStr = HttpParser.serializeRequest(correct);
-        assertEquals(reqStr, correctStr);
+        String testStr = HttpParser.serializeRequest(correct);
+        assertEquals(reqStr, testStr);
+    }
+
+    @Test
+    public void testResParse() throws IOException {
+        String res = """
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+        Content-Length: 32
+
+        {\"name\": \"John Smith\",\"age\": 30}       
+        """;
+
+        HttpResponse response = HttpParser.parseResponse(new ByteArrayInputStream(res.getBytes()));
+
+        HttpResponse correct = new ResponseBuilder()
+        .version("HTTP/1.1")
+        .status(HttpStatus.OK)
+        .header("Content-Type", "application/json")
+        .header("Content-Length", "32")
+        .body("{\"name\": \"John Smith\",\"age\": 30}")
+        .getResponse();
+
+        String resStr = HttpParser.serializeResponse(response);
+        String testStr = HttpParser.serializeResponse(correct);
+        assertEquals(resStr, testStr);
     }
 }

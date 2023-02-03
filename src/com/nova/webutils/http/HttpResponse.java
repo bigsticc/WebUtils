@@ -1,11 +1,12 @@
 package com.nova.webutils.http;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpResponse {
     String version;
     HttpStatus status;
-    Map<String, String> headers;
+    Map<String, String> headers = new HashMap<>();
     String body;
 
     protected HttpResponse() {}
