@@ -4,6 +4,10 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Programmatic representation of a client's request to a server.
+ *  @author Supernova
+ *  @since 1.0
+ */
 public class HttpRequest {
     HttpMethod method;
     URI uri;

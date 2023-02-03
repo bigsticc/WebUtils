@@ -2,6 +2,11 @@ package com.nova.webutils.http;
 
 import java.net.URI;
 
+/** Utility for making HttpRequest objects
+ *  @author Supernova
+ *  @since 1.0
+ *  @see HttpRequest
+ */
 public class RequestBuilder {
     HttpRequest request = new HttpRequest();
 

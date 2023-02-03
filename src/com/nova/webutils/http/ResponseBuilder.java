@@ -1,5 +1,10 @@
 package com.nova.webutils.http;
 
+/** Utility for making HttpResponse objects
+ *  @author Supernova
+ *  @since 1.0
+ *  @see HttpResponse
+ */
 public class ResponseBuilder {
     HttpResponse response = new HttpResponse();
 

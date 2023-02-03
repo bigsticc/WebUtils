@@ -3,6 +3,10 @@ package com.nova.webutils.http;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Programmatic representation of a server's response to a client
+ *  @author Supernova
+ *  @since 1.0
+ */
 public class HttpResponse {
     String version;
     HttpStatus status;

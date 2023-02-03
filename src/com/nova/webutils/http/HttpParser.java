@@ -8,8 +8,11 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Converts requests/responses to and from strings
+ *  @author Supernova
+ *  @since 1.0
+ */
 public class HttpParser {
-
     public static String serializeRequest(HttpRequest req) {
         StringBuilder sb = new StringBuilder();
 
