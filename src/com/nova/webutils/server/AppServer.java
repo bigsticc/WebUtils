@@ -27,13 +27,16 @@ public class AppServer {
     Selector selector;
     ServerSocketChannel socket;
 
-    Map<String, Application> appMap = new HashMap<>();
+    Map<String, Class<? extends Application>> appMap = new HashMap<>();
 
     public AppServer() throws IOException {
         selector = Selector.open();
         socket = ServerSocketChannel.open();
     }
 
+    public void registerApp(String path, Class<? extends Application> app) {
+        appMap.put(path, app);
+    }
     public void run(int port) throws IOException {
         socket.socket().bind(new InetSocketAddress(port), 10);
         socket.configureBlocking(false);
@@ -44,6 +47,7 @@ public class AppServer {
             for (SelectionKey key : selector.selectedKeys()) {
                 if(key.isAcceptable()) handleAccept(socket, key);
                 else if(key.isReadable()) handleRead(key);
+                selector.selectedKeys().remove(key);
             }
         }
     }
@@ -72,13 +76,20 @@ public class AppServer {
     private HttpResponse process(HttpRequest req) {
         String path = req.getUri().getRawPath();
 
-        for(Map.Entry<String, Application> entry : appMap.entrySet()) {
-            if(path.contains(entry.getKey())) return entry.getValue().process(req); 
+        for(Map.Entry<String, Class<? extends Application>> entry : appMap.entrySet()) {
+            if(path.contains(entry.getKey())) {
+                try {
+                    return entry.getValue().getConstructor().newInstance().process(req); 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } 
+            }
         }
         return new ResponseBuilder()
         .version("HTTP/1.1")
         .status(HttpStatus.NOT_FOUND)
         .header("Content-Type", "text/html")
+        .header("Content-Length", "36")
         .body("<html><h1>404 Not Found</h1></html>")
         .getResponse();
     }
