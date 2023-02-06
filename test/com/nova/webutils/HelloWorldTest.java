@@ -1,4 +1,4 @@
-package test.com.nova.webutils.tests;
+package test.com.nova.webutils;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package test.com.nova.webutils.tests;
+package test.com.nova.webutils;
 import org.junit.jupiter.api.Test;
 
 import com.nova.webutils.http.HttpMethod;
