@@ -23,32 +23,37 @@ import com.nova.webutils.http.ResponseBuilder;
  *  @since 1.0
  */
 
-public class AppServer {
+public class AppServer extends Thread {
     Selector selector;
     ServerSocketChannel socket;
 
     Map<String, Class<? extends Application>> appMap = new HashMap<>();
 
-    public AppServer() throws IOException {
+    public AppServer(int port) throws IOException {
         selector = Selector.open();
         socket = ServerSocketChannel.open();
+        socket.socket().bind(new InetSocketAddress(port), 10);
     }
 
     public void registerApp(String path, Class<? extends Application> app) {
         appMap.put(path, app);
     }
-    public void run(int port) throws IOException {
-        socket.socket().bind(new InetSocketAddress(port), 10);
-        socket.configureBlocking(false);
-        int ops = socket.validOps();
-        socket.register(selector, ops);
-        while(true) {
-            selector.select();
-            for (SelectionKey key : selector.selectedKeys()) {
-                if(key.isAcceptable()) handleAccept(socket, key);
-                else if(key.isReadable()) handleRead(key);
-                selector.selectedKeys().remove(key);
+    public void run() {
+        try {
+            socket.configureBlocking(false);
+            int ops = socket.validOps();
+            socket.register(selector, ops);
+            while(true) {
+                selector.select();
+                for (SelectionKey key : selector.selectedKeys()) {
+                    if(key.isAcceptable()) handleAccept(socket, key);
+                    else if(key.isReadable()) handleRead(key);
+                    
+                    selector.selectedKeys().remove(key);
+                }
             }
+        } catch(IOException e) {
+            
         }
     }
 
