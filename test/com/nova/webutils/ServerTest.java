@@ -13,16 +13,17 @@ import com.nova.webutils.server.Application;
 
 public class ServerTest {
     @Test
-    public void serverReqTest() throws IOException {
+    public void serverReqTest() throws IOException, InterruptedException {
         AppServer server = new AppServer(8080);
 
         server.registerApp("/", TestApp.class);
         server.start();
 
+        Thread.sleep(20000);
+
         assertTrue(true);
     }
-    private class TestApp implements Application {
-
+    private static class TestApp implements Application {
         @Override
         public HttpResponse process(HttpRequest req) {
             return new ResponseBuilder()
