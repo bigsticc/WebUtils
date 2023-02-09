@@ -29,15 +29,26 @@ public class AppServer extends Thread {
 
     Map<String, Class<? extends Application>> appMap = new HashMap<>();
 
+    /** Creates a new AppServer and binds it to the system ip address, on the specified port
+     *
+     * @param port Desired port to open on (0-65535)
+     * @throws IOException When there is an error in NIO operations
+     */
     public AppServer(int port) throws IOException {
         selector = Selector.open();
         socket = ServerSocketChannel.open();
         socket.socket().bind(new InetSocketAddress(port), 10);
     }
 
+    /**
+     * Registers an Application to search for when a request is made
+     * @param path App will respond when request is made to this path
+     * @param app Application to register
+     */
     public void registerApp(String path, Class<? extends Application> app) {
         appMap.put(path, app);
     }
+
     public void run() {
         try {
             socket.configureBlocking(false);
