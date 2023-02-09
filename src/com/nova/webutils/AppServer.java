@@ -1,4 +1,4 @@
-package com.nova.webutils.server;
+package com.nova.webutils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import com.nova.webutils.http.HttpResponse;
 import com.nova.webutils.http.HttpStatus;
 import com.nova.webutils.http.ResponseBuilder;
 
-/** Main entry point to a WebUtils system, recieves http requests
+/** Main entry point to a WebUtils system, receives http requests
  *  and delegates them to user written applications
  *  @author Supernova
  *  @since 1.0
@@ -46,18 +46,18 @@ public class AppServer extends Thread {
             while(true) {
                 selector.select();
                 for (SelectionKey key : selector.selectedKeys()) {
-                    if(key.isAcceptable()) handleAccept(socket, key);
+                    if(key.isAcceptable()) handleAccept(socket);
                     else if(key.isReadable()) handleRead(key);
                     
                     selector.selectedKeys().remove(key);
                 }
             }
         } catch(IOException e) {
-            
+            e.printStackTrace();
         }
     }
 
-    private void handleAccept(ServerSocketChannel socket, SelectionKey key) throws IOException {
+    private void handleAccept(ServerSocketChannel socket) throws IOException {
         SocketChannel client = socket.accept();
         client.configureBlocking(false);
 
@@ -81,20 +81,24 @@ public class AppServer extends Thread {
     private HttpResponse process(HttpRequest req) {
         String path = req.getUri().getRawPath();
 
-        for(Map.Entry<String, Class<? extends Application>> entry : appMap.entrySet()) {
-            if(path.contains(entry.getKey())) {
-                try {
-                    return entry.getValue().getConstructor().newInstance().process(req); 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } 
+        if(appMap.containsKey(path)) {
+            try {
+                return appMap.get(path).getConstructor().newInstance().process(req);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new ResponseBuilder()
+                        .version("HTTP/1.1")
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .header("Content-Type", "text/html")
+                        .body("<html><h1>Internal Server Error</h1></html>")
+                        .getResponse();
             }
         }
+
         return new ResponseBuilder()
         .version("HTTP/1.1")
         .status(HttpStatus.NOT_FOUND)
         .header("Content-Type", "text/html")
-        .header("Content-Length", "36")
         .body("<html><h1>404 Not Found</h1></html>")
         .getResponse();
     }

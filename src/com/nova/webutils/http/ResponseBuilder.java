@@ -21,6 +21,7 @@ public class ResponseBuilder {
         return this;
     }
     public ResponseBuilder body(String value) {
+        this.header("Content-Length", Integer.toString(value.length()));
         response.setBody(value);
         return this;
     }

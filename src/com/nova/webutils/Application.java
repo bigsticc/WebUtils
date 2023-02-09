@@ -1,4 +1,4 @@
-package com.nova.webutils.server;
+package com.nova.webutils;
 
 import com.nova.webutils.http.HttpRequest;
 import com.nova.webutils.http.HttpResponse;
@@ -8,5 +8,5 @@ import com.nova.webutils.http.HttpResponse;
  *  @since 1.0
  */
 public interface Application {
-    public HttpResponse process(HttpRequest req);
+    HttpResponse process(HttpRequest req);
 }

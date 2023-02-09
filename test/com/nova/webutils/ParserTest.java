@@ -24,7 +24,7 @@ public class ParserTest {
         Content-Type: application/json
         Content-Length: 32
 
-        {\"name\": \"John Smith\",\"age\": 30}
+        {"name": "John Smith","age": 30}
         """;
 
         HttpRequest request = HttpParser.parseRequest(new ByteArrayInputStream(req.getBytes()));
@@ -35,7 +35,6 @@ public class ParserTest {
             .version("HTTP/1.1")
             .header("Host", "www.example.com")
             .header("Content-Type", "application/json")
-            .header("Content-Length", "32")
             .body("{\"name\": \"John Smith\",\"age\": 30}")
             .getRequest();
         
@@ -51,7 +50,7 @@ public class ParserTest {
         Content-Type: application/json
         Content-Length: 32
 
-        {\"name\": \"John Smith\",\"age\": 30}       
+        {"name": "John Smith","age": 30}    
         """;
 
         HttpResponse response = HttpParser.parseResponse(new ByteArrayInputStream(res.getBytes()));
@@ -60,7 +59,6 @@ public class ParserTest {
         .version("HTTP/1.1")
         .status(HttpStatus.OK)
         .header("Content-Type", "application/json")
-        .header("Content-Length", "32")
         .body("{\"name\": \"John Smith\",\"age\": 30}")
         .getResponse();
 

@@ -27,6 +27,7 @@ public class RequestBuilder {
         return this;
     }
     public RequestBuilder body(String body) {
+        this.header("Content-Length", Integer.toString(body.length()));
         request.setBody(body);
         return this;
     }
