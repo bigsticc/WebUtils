@@ -13,5 +13,5 @@ public interface Application {
      * @param req The request given by the client
      * @return A response for the client's request
      */
-    HttpResponse process(HttpRequest req);
+    HttpResponse process(HttpRequest req) throws Exception;
 }
