@@ -1,5 +1,3 @@
-.vscode/
-.idea/
 build/
 test-build/
 webutils.iml
