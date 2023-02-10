@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="webutils" default="info">
+<project name="webutils" default="build">
     <property file="build.properties"/>
 
     <path id="junit.libs.path">
