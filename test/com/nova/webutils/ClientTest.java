@@ -19,9 +19,14 @@ public class ClientTest {
             .method(HttpMethod.GET)
             .path(URI.create("/"))
             .version("HTTP/1.1")
-
             .header("Host", "example.com")
             .getRequest());
+        assertNotNull(res);
+        System.out.println(HttpParser.serializeResponse(res));
+    }
+    @Test
+    public void getTest() throws IOException {
+        HttpResponse res = HttpClient.quickGet(new InetSocketAddress("example.com", 80), "/");
         assertNotNull(res);
         System.out.println(HttpParser.serializeResponse(res));
     }
