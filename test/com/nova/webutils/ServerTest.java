@@ -1,4 +1,4 @@
-package test.com.nova.webutils;
+package com.nova.webutils;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;

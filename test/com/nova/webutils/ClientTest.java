@@ -1,6 +1,5 @@
-package test.com.nova.webutils;
+package com.nova.webutils;
 
-import com.nova.webutils.HttpClient;
 import com.nova.webutils.http.HttpMethod;
 import com.nova.webutils.http.HttpParser;
 import com.nova.webutils.http.HttpResponse;
