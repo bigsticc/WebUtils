@@ -53,18 +53,17 @@
     </target>
 
     <target name="document" depends="compile">
-        <mkdir dir="${dist}/docs"/>
-        <javadoc sourcepath="${src}" destdir="${dist}/docs"/>
+        <mkdir dir="${docs}"/>
+        <javadoc sourcepath="${src}" destdir="${docs}"/>
     </target>
 
-    <target name="dist" depends="test,document">
-        <mkdir dir="${dist}/lib"/>
-        <jar jarfile="${dist}/lib/WebUtils-${DSTAMP}.jar" basedir="${build}"/>
+    <target name="build" depends="test,document">
+        <mkdir dir="${dist}"/>
+        <jar jarfile="${dist}/WebUtils-${DSTAMP}.jar" basedir="${build}"/>
     </target>
 
     <target name="clean">
-        <delete dir="${build}"/>
-        <delete dir="${dist}"/>
+        <delete dir="build"/>
         <delete dir="test-build"/>
     </target>
     
