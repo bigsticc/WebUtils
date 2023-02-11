@@ -5,7 +5,6 @@ import com.nova.webutils.http.*;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URI;
 
 /** Basic HTTP client. Has basic static methods for assisting in making requests using the existing framework
  * @author Supernova

@@ -15,7 +15,6 @@ import com.nova.webutils.http.HttpParser;
 import com.nova.webutils.http.HttpRequest;
 import com.nova.webutils.http.HttpResponse;
 import com.nova.webutils.http.HttpStatus;
-import com.nova.webutils.http.ResponseBuilder;
 import com.nova.webutils.util.MessageHelper;
 
 /** Main entry point to a WebUtils system, receives http requests

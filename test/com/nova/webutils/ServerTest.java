@@ -3,14 +3,11 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 
-import com.nova.webutils.HttpClient;
 import com.nova.webutils.http.*;
 import com.nova.webutils.util.MessageHelper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.nova.webutils.AppServer;
-import com.nova.webutils.Application;
 
 public class ServerTest {
     @Test
@@ -57,8 +54,7 @@ public class ServerTest {
 
         @Override
         public HttpResponse process(HttpRequest req) {
-            String myBody = "<html><p>you have accessed the top secret page.</p></html>";
-            return MessageHelper.quickHtml("<html><h1>Hello World!</h1></html>");
+            return MessageHelper.quickHtml("<html><p>you have accessed the top secret page.</p></html>");
         }
     }
 }
