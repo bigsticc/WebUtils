@@ -4,6 +4,7 @@ import com.nova.webutils.http.HttpMethod;
 import com.nova.webutils.http.HttpParser;
 import com.nova.webutils.http.HttpResponse;
 import com.nova.webutils.http.RequestBuilder;
+import com.nova.webutils.util.MessageHelper;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -26,7 +27,8 @@ public class ClientTest {
     }
     @Test
     public void getTest() throws IOException {
-        HttpResponse res = HttpClient.quickGet(new InetSocketAddress("example.com", 80), "/");
+        String host = "example.com";
+        HttpResponse res = HttpClient.request(new InetSocketAddress(host, 80), MessageHelper.getPage(host, "/"));
         assertNotNull(res);
         System.out.println(HttpParser.serializeResponse(res));
     }

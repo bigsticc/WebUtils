@@ -29,40 +29,4 @@ public class HttpClient {
         socket.close();
         return res;
     }
-
-    /** Helper method for making GET requests, this method simply invokes request() with a pre-built HttpRequest
-     *
-     * @param host Valid InetAddress which corresponds to the desired host
-     * @param path Path to request to
-     * @return the HttpResponse object which was returned by the host
-     * @throws IOException when there is an error in the Socket connection
-     */
-    public static HttpResponse quickGet(InetSocketAddress host, String path) throws IOException {
-        return request(host, new RequestBuilder()
-                .method(HttpMethod.GET)
-                .path(URI.create(path))
-                .version("HTTP/1.1")
-                .header("Host", host.getHostName())
-                .getRequest()
-        );
-    }
-
-    /** Helper method for making POST requests, invokes request() with a path and body
-     *
-     * @param host Valid InetAddress which corresponds to the desired host
-     * @param path Path to request to
-     * @param body Payload to send to the sever
-     * @return the HttpResponse object which was returned by the host
-     * @throws IOException when there is an error in the Socket connection
-     */
-    public static HttpResponse quickPost(InetSocketAddress host, String path, String body) throws IOException {
-        return request(host, new RequestBuilder()
-                .method(HttpMethod.POST)
-                .path(URI.create(path))
-                .version("HTTP/1.1")
-                .header("Host", host.getHostName())
-                .body(body)
-                .getRequest()
-        );
-    }
 }

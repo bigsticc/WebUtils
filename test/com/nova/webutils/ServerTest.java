@@ -5,6 +5,7 @@ import java.net.URI;
 
 import com.nova.webutils.HttpClient;
 import com.nova.webutils.http.*;
+import com.nova.webutils.util.MessageHelper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,12 +48,7 @@ public class ServerTest {
         public TestApp() {}
         @Override
         public HttpResponse process(HttpRequest req) {
-            return new ResponseBuilder()
-                    .version("HTTP/1.1")
-                    .status(HttpStatus.OK)
-                    .header("Content-Type", "text/html")
-                    .body("<html><h1>Hello World!</h1></html>")
-            .getResponse();
+            return MessageHelper.quickHtml("<html><h1>Hello World!</h1></html>");
         }
     }
 
@@ -62,12 +58,7 @@ public class ServerTest {
         @Override
         public HttpResponse process(HttpRequest req) {
             String myBody = "<html><p>you have accessed the top secret page.</p></html>";
-            return new ResponseBuilder()
-                    .version("HTTP/1.1")
-                    .status(HttpStatus.OK)
-                    .header("Content-Type", "text/html")
-                    .body(myBody)
-                    .getResponse();
+            return MessageHelper.quickHtml("<html><h1>Hello World!</h1></html>");
         }
     }
 }

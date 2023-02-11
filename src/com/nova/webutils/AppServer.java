@@ -16,6 +16,7 @@ import com.nova.webutils.http.HttpRequest;
 import com.nova.webutils.http.HttpResponse;
 import com.nova.webutils.http.HttpStatus;
 import com.nova.webutils.http.ResponseBuilder;
+import com.nova.webutils.util.MessageHelper;
 
 /** Main entry point to a WebUtils system, receives http requests
  *  and delegates them to user written applications
@@ -97,20 +98,10 @@ public class AppServer extends Thread {
                 return appMap.get(path).getConstructor().newInstance().process(req);
             } catch (Exception e) {
                 e.printStackTrace();
-                return new ResponseBuilder()
-                        .version("HTTP/1.1")
-                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .header("Content-Type", "text/html")
-                        .body("<html><h1>Internal Server Error</h1></html>")
-                        .getResponse();
+                return MessageHelper.resError(HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
 
-        return new ResponseBuilder()
-        .version("HTTP/1.1")
-        .status(HttpStatus.NOT_FOUND)
-        .header("Content-Type", "text/html")
-        .body("<html><h1>404 Not Found</h1></html>")
-        .getResponse();
+        return MessageHelper.resError(HttpStatus.NOT_FOUND);
     }
 }
