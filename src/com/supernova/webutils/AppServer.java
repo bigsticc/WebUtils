@@ -115,7 +115,7 @@ public class AppServer extends Thread {
         try {
             return appMap.entrySet().stream()
                     .filter(e -> path.matches(e.getKey())).map(Map.Entry::getValue)
-                    .toList().get(0)
+                    .findFirst().orElseThrow(IllegalStateException::new)
                     .getConstructor().newInstance().process(req);
         } catch (Exception e) {
             e.printStackTrace();
