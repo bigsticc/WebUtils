@@ -1,6 +1,6 @@
-package com.nova.webutils.util;
+package com.supernova.webutils.util;
 
-import com.nova.webutils.http.*;
+import com.supernova.webutils.http.*;
 
 import java.net.URI;
 

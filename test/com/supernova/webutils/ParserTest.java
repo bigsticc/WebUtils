@@ -1,13 +1,13 @@
-package com.nova.webutils;
+package com.supernova.webutils;
+import com.supernova.webutils.http.HttpMethod;
+import com.supernova.webutils.http.HttpParser;
+import com.supernova.webutils.http.HttpRequest;
+import com.supernova.webutils.http.HttpResponse;
 import org.junit.jupiter.api.Test;
 
-import com.nova.webutils.http.HttpMethod;
-import com.nova.webutils.http.HttpParser;
-import com.nova.webutils.http.HttpRequest;
-import com.nova.webutils.http.HttpResponse;
-import com.nova.webutils.http.HttpStatus;
-import com.nova.webutils.http.RequestBuilder;
-import com.nova.webutils.http.ResponseBuilder;
+import com.supernova.webutils.http.HttpStatus;
+import com.supernova.webutils.http.RequestBuilder;
+import com.supernova.webutils.http.ResponseBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,7 +50,7 @@ public class ParserTest {
         Content-Type: application/json
         Content-Length: 32
 
-        {"name": "John Smith","age": 30}    
+        {"name": "John Smith","age": 30}
         """;
 
         HttpResponse response = HttpParser.parseResponse(new ByteArrayInputStream(res.getBytes()));

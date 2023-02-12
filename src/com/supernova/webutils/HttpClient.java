@@ -1,6 +1,8 @@
-package com.nova.webutils;
+package com.supernova.webutils;
 
-import com.nova.webutils.http.*;
+import com.supernova.webutils.http.HttpParser;
+import com.supernova.webutils.http.HttpRequest;
+import com.supernova.webutils.http.HttpResponse;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 /** Utility for making HttpResponse objects
  *  @author Supernova

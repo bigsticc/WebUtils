@@ -1,10 +1,10 @@
-package com.nova.webutils;
+package com.supernova.webutils;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 
-import com.nova.webutils.http.*;
-import com.nova.webutils.util.MessageHelper;
+import com.supernova.webutils.http.*;
+import com.supernova.webutils.util.MessageHelper;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

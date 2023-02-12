@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,9 +49,9 @@ public class HttpResponse {
 
     public String toString() {
         StringBuilder response = new StringBuilder();
-        response.append(version + " " + status.getStatus() + " " + status.getReasonPhrase() + "\r\n");
+        response.append(version).append(" ").append(status.getStatus()).append(" ").append(status.getReasonPhrase()).append("\r\n");
         for (Map.Entry<String, String> header : headers.entrySet()) {
-            response.append(header.getKey() + ": " + header.getValue() + "\r\n");
+            response.append(header.getKey()).append(": ").append(header.getValue()).append("\r\n");
         }
         response.append("\r\n");
         response.append(body);

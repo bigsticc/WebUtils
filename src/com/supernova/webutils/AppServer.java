@@ -1,4 +1,4 @@
-package com.nova.webutils;
+package com.supernova.webutils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,11 +11,11 @@ import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.nova.webutils.http.HttpParser;
-import com.nova.webutils.http.HttpRequest;
-import com.nova.webutils.http.HttpResponse;
-import com.nova.webutils.http.HttpStatus;
-import com.nova.webutils.util.MessageHelper;
+import com.supernova.webutils.http.HttpParser;
+import com.supernova.webutils.http.HttpRequest;
+import com.supernova.webutils.http.HttpResponse;
+import com.supernova.webutils.http.HttpStatus;
+import com.supernova.webutils.util.MessageHelper;
 
 /** Main entry point to a WebUtils system, receives http requests
  *  and delegates them to user written applications

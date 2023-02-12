@@ -1,4 +1,4 @@
-package com.nova.webutils.util;
+package com.supernova.webutils.util;
 
 /** Mime types are two part identifiers for content format on the internet.
  * This enum lists the most used (the ones on mozilla's article...) and their respective file extension

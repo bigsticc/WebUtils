@@ -20,7 +20,7 @@ I apologize in advance if this repository contains absolutely abhorrent code.
 
 ## How to use
 To use WebUtils, include the JAR Archive in your classpath, then create a class implementing 
-`com.nova.webutils.Application`. Then create an `AppServer` instance and register the app.
+`com.supernova.webutils.Application`. Then create an `AppServer` instance and register the app.
 Finally, start the server on a port, and it will be ready to listen.
 
 
@@ -28,11 +28,11 @@ Finally, start the server on a port, and it will be ready to listen.
 Here is an `ExampleApp` class, which provides a brief demonstration of WebUtils' capabilities.
 
 ```Java
-import com.nova.webutils.Application;
-import com.nova.webutils.AppServer;
-import com.nova.webutils.http.HttpRequest;
-import com.nova.webutils.http.HttpResponse;
-import com.nova.webutils.util.MessageHelper;
+import com.supernova.webutils.Application;
+import com.supernova.webutils.AppServer;
+import http.com.supernova.webutils.HttpRequest;
+import http.com.supernova.webutils.HttpResponse;
+import util.com.supernova.webutils.MessageHelper;
 
 public class ExampleApp implements Application {
     @Override
@@ -54,9 +54,9 @@ public class ExampleApp implements Application {
 Here is a second example, demonstrating WebUtils' capabilities as a client
 
 ```Java
-import com.nova.webutils.HttpClient;
-import com.nova.webutils.http.HttpParser;
-import com.nova.webutils.util.MessageHelper;
+import com.supernova.webutils.HttpClient;
+import http.com.supernova.webutils.HttpParser;
+import util.com.supernova.webutils.MessageHelper;
 
 import java.net.InetSocketAddress;
 

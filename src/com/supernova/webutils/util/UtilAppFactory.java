@@ -1,8 +1,8 @@
-package com.nova.webutils.util;
+package com.supernova.webutils.util;
 
-import com.nova.webutils.Application;
-import com.nova.webutils.http.HttpStatus;
-import com.nova.webutils.http.ResponseBuilder;
+import com.supernova.webutils.Application;
+import com.supernova.webutils.http.HttpStatus;
+import com.supernova.webutils.http.ResponseBuilder;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

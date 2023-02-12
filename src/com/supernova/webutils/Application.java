@@ -1,7 +1,7 @@
-package com.nova.webutils;
+package com.supernova.webutils;
 
-import com.nova.webutils.http.HttpRequest;
-import com.nova.webutils.http.HttpResponse;
+import com.supernova.webutils.http.HttpRequest;
+import com.supernova.webutils.http.HttpResponse;
 
 /** User written function for processing http requests
  *  @author Supernova

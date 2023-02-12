@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 import java.net.URI;
 import java.util.HashMap;

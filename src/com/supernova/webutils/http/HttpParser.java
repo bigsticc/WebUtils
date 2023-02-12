@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;

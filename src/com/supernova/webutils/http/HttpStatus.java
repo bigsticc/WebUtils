@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 /** Status code of an HTTP response, indicates potential errors, or informs the client of the nature of the response.
  *  @author Supernova
@@ -130,8 +130,8 @@ public enum HttpStatus {
     NOT_EXTENDED(510, "Not Extended");
 
 
-    int statusCode;
-    String reasonPhrase;
+    final int statusCode;
+    final String reasonPhrase;
     HttpStatus(int statusCode, String reasonPhrase) {
         this.statusCode = statusCode;
         this.reasonPhrase = reasonPhrase;

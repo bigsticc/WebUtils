@@ -1,4 +1,4 @@
-package com.nova.webutils.http;
+package com.supernova.webutils.http;
 
 /** HTTP's request methods, which specify the action that should be performed
  *  @author Supernova
@@ -9,5 +9,5 @@ public enum HttpMethod {
     POST, 
     PUT, 
     PATCH, 
-    DELETE;  
+    DELETE
 }

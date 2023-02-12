@@ -1,10 +1,10 @@
-package com.nova.webutils;
+package com.supernova.webutils;
 
-import com.nova.webutils.http.HttpMethod;
-import com.nova.webutils.http.HttpParser;
-import com.nova.webutils.http.HttpResponse;
-import com.nova.webutils.http.RequestBuilder;
-import com.nova.webutils.util.MessageHelper;
+import com.supernova.webutils.http.HttpMethod;
+import com.supernova.webutils.http.HttpParser;
+import com.supernova.webutils.http.HttpResponse;
+import com.supernova.webutils.http.RequestBuilder;
+import com.supernova.webutils.util.MessageHelper;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
