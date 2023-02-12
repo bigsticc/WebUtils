@@ -1,12 +1,23 @@
 # WebUtils
 
-WebUtils is a simple Java toolkit that allows you to run your web apps with very little complication,
+WebUtils is a simple, no-dependency* Java toolkit that allows you to run your web apps with very little complication,
 and make web requests with ease.
+
+<sub>*no runtime dependencies, JUnit 5 Jupiter is required at test-time</sub>
+
+
+## Building from source
+- Install JDK19 and Apache Ant
+- Clone https://github.com/Supernova9987/WebUtils.git
+- In the directory you have created, run `ant build`
+- The new .jar should be in `build/dist/`, and javadoc in `build/docs/`
+- Run `ant clean` to delete building and testing artifacts
 
 ## How to use
 To use WebUtils, include the JAR Archive in your classpath, then create a class implementing 
 `com.nova.webutils.Application`. Then create an `AppServer` instance and register the app.
 Finally, start the server on a port, and it will be ready to listen.
+
 
 ## Example
 Here is an `ExampleApp` class, which provides a brief demonstration of WebUtils' capabilities.
@@ -54,3 +65,5 @@ public class Foo {
     }
 }
 ```
+
+<img src="https://img.shields.io/badge/license-GPL--3.0-red"/>
