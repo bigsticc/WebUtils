@@ -20,15 +20,19 @@ package com.supernova.webutils;
 import com.supernova.webutils.http.HttpRequest;
 import com.supernova.webutils.http.HttpResponse;
 
-/** User written function for processing http requests
- *  @author Supernova
- *  @since 1.0
+/**
+ * The `Application` interface represents an HTTP-based application that can process HTTP requests and produce HTTP responses.
+ *
+ * @author Supernova
+ * @since 1.0
  */
 public interface Application {
-    /** Executed by the server when an implementing class is invoked by the server
+    /**
+     * Processes an HTTP request and produces an HTTP response.
      *
-     * @param req The request given by the client
-     * @return A response for the client's request
+     * @param req The HTTP request to be processed.
+     * @return The HTTP response produced by processing the request.
+     * @throws Exception If an error occurs while processing the request.
      */
     HttpResponse process(HttpRequest req) throws Exception;
 }

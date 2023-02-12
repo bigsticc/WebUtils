@@ -17,9 +17,22 @@
 
 package com.supernova.webutils.util;
 
-/** Mime types are two part identifiers for content format on the internet.
- * This enum lists the most used (the ones on mozilla's article...) and their respective file extension
+/**
+ * This enum defines a list of MIME types commonly used in web applications.
  *
+ * <p>Each value in the enum represents a MIME type, with a corresponding string representation
+ * of the MIME type stored in the `mime` field. The `getMime` method can be used to retrieve the
+ * string representation of the MIME type, while the `getByMime` method can be used to retrieve the
+ * `MimeType` enum value corresponding to a given string representation of a MIME type.
+ *
+ * <p>Here's an example usage of the `MimeType` enum:
+ * <pre>
+ * {@code
+ * String mime = "image/jpeg";
+ * MimeType mt = MimeType.getByMime(mime);
+ * System.out.println(mt.getMime()); // Outputs "image/jpeg"
+ * }
+ * </pre>
  * @author Supernova
  * @since 1.0
  */
