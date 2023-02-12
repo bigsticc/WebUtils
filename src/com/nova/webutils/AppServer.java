@@ -54,7 +54,7 @@ public class AppServer extends Thread {
             socket.configureBlocking(false);
             int ops = socket.validOps();
             socket.register(selector, ops);
-            while(true) {
+            while(!isInterrupted()) {
                 selector.select();
                 for (SelectionKey key : selector.selectedKeys()) {
                     if(key.isAcceptable()) handleAccept(socket);
