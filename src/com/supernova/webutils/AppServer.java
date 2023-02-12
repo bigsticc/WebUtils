@@ -109,14 +109,15 @@ public class AppServer extends Thread {
 
     private HttpResponse process(HttpRequest req) {
         String path = req.getUri().getRawPath();
-
         if(!appMap.containsKey(path)) return MessageHelper.resError(HttpStatus.NOT_FOUND);
-
         try {
-            return appMap.entrySet().stream()
-                    .filter(e -> path.matches(e.getKey())).map(Map.Entry::getValue)
-                    .findFirst().orElseThrow(IllegalStateException::new)
-                    .getConstructor().newInstance().process(req);
+            Class<? extends Application> appClass = appMap.entrySet().stream()
+                    .filter(entry -> path.matches(entry.getKey()))
+                    .map(Map.Entry::getValue)
+                    .findFirst()
+                    .orElseThrow(IllegalStateException::new);
+            Application app = appClass.getConstructor().newInstance();
+            return app.process(req);
         } catch (Exception e) {
             e.printStackTrace();
             return MessageHelper.resError(HttpStatus.INTERNAL_SERVER_ERROR);
