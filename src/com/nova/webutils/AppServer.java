@@ -94,8 +94,10 @@ public class AppServer extends Thread {
 
         if(appMap.containsKey(path)) {
             try {
-                String key = appMap.keySet().stream().filter(path::matches).toList().get(0);
-                return appMap.get(key).getConstructor().newInstance().process(req);
+                return appMap.entrySet().stream()
+                        .filter(e -> path.matches(e.getKey())).map(Map.Entry::getValue)
+                        .toList().get(0)
+                        .getConstructor().newInstance().process(req);
             } catch (Exception e) {
                 e.printStackTrace();
                 return MessageHelper.resError(HttpStatus.INTERNAL_SERVER_ERROR);
