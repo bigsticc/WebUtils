@@ -56,8 +56,8 @@ public class AppServer extends Thread {
             socket.register(selector, ops);
             while(!isInterrupted()) {
                 selector.select();
-                for (SelectionKey key : selector.selectedKeys()) {
-                    if(key.isAcceptable()) handleAccept(socket);
+                for(SelectionKey key : selector.selectedKeys()) {
+                    if(key.isAcceptable()) handleAccept();
                     else if(key.isReadable()) handleRead(key);
                     
                     selector.selectedKeys().remove(key);
@@ -68,7 +68,7 @@ public class AppServer extends Thread {
         }
     }
 
-    private void handleAccept(ServerSocketChannel socket) throws IOException {
+    private void handleAccept() throws IOException {
         SocketChannel client = socket.accept();
         client.configureBlocking(false);
 
@@ -79,6 +79,7 @@ public class AppServer extends Thread {
 
         ByteBuffer buffer = ByteBuffer.allocate(8192);
         client.read(buffer);
+
         ByteArrayInputStream in = new ByteArrayInputStream(buffer.array());
         HttpRequest req = HttpParser.parseRequest(in);
 
@@ -92,18 +93,16 @@ public class AppServer extends Thread {
     private HttpResponse process(HttpRequest req) {
         String path = req.getUri().getRawPath();
 
-        if(appMap.containsKey(path)) {
-            try {
-                return appMap.entrySet().stream()
-                        .filter(e -> path.matches(e.getKey())).map(Map.Entry::getValue)
-                        .toList().get(0)
-                        .getConstructor().newInstance().process(req);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return MessageHelper.resError(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
+        if(!appMap.containsKey(path)) return MessageHelper.resError(HttpStatus.NOT_FOUND);
 
-        return MessageHelper.resError(HttpStatus.NOT_FOUND);
+        try {
+            return appMap.entrySet().stream()
+                    .filter(e -> path.matches(e.getKey())).map(Map.Entry::getValue)
+                    .toList().get(0)
+                    .getConstructor().newInstance().process(req);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return MessageHelper.resError(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
