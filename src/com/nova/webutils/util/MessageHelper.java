@@ -4,6 +4,10 @@ import com.nova.webutils.http.*;
 
 import java.net.URI;
 
+/** Utility methods to create http requests using common templates
+ * @author Supernova
+ * @since 1.0
+ */
 public class MessageHelper {
     public static HttpRequest getPage(String host, String path) {
         return new RequestBuilder()

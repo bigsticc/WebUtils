@@ -7,6 +7,11 @@ import com.nova.webutils.http.ResponseBuilder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/** Basic, generic applications which can be quickly configured and plugged into a server.
+ *
+ * @author Supernova
+ * @since 1.0
+ */
 public class UtilAppFactory {
     public static Application staticServer(String root) {
         return req -> {

@@ -1,5 +1,11 @@
 package com.nova.webutils.util;
 
+/** Mime types are two part identifiers for content format on the internet.
+ * This enum lists the most used (the ones on mozilla's article...) and their respective file extension
+ *
+ * @author Supernova
+ * @since 1.0
+ */
 public enum MimeType {
 
     aac("audio/aac"),
