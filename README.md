@@ -3,6 +3,11 @@
 WebUtils is a simple, no-dependency* Java toolkit that allows you to run your web apps with very little complication,
 and make web requests with ease.
 
+<sub>
+Disclaimer: This is my first programming project that has been published, and I am only a hobbyist developer. 
+I apologize in advance if this repository contains absolutely abhorrent code.
+</sub>
+<br><br>
 <sub>*no runtime dependencies, JUnit 5 Jupiter is required at test-time</sub>
 
 
