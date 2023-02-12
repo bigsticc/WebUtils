@@ -71,4 +71,8 @@ public class Foo {
 }
 ```
 
+## Contributing
+
+We encourage you to make any positive contribution that you can, but please observe the guidelines layed out in [CONTRIBUTING.MD](CONTRIBUTING.md)
+
 <img src="https://img.shields.io/badge/license-GPL--3.0-red"/>
